@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DistributedPartlyCloudDatabase.ORM
+namespace DistributedPartlyCloudDatabase.DependencyResolver
 {
     public class Class1
     {
