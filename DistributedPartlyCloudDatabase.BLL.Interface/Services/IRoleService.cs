@@ -4,6 +4,6 @@ namespace DistributedPartlyCloudDatabase.BLL.Interface.Services
 {
     public interface IRoleService
     {
-        IEnumerable<RoleEntity> GetAllRoleEntities();
+        //IEnumerable<RoleEntity> GetAllRoleEntities();
     }
 }

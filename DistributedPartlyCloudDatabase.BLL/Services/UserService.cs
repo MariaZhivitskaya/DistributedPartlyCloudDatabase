@@ -1,14 +1,14 @@
 ﻿using DistributedPartlyCloudDatabase.BLL.Interface.Services;
-using System;
 using System.Collections.Generic;
 using DistributedPartlyCloudDatabase.BLL.Interface.Entities;
 using DistributedPartlyCloudDatabase.DAL.Interface;
 using DistributedPartlyCloudDatabase.DAL.Interface.Repositories;
 using DistributedPartlyCloudDatabase.BLL.Mappers;
+using System.Linq;
 
 namespace DistributedPartlyCloudDatabase.BLL.Services
 {
-    class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IUserRepository userRepository;
