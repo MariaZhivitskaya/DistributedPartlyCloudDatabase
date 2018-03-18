@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*.login {
+    border: 4px double black;
+    background: url("Images/BgLogin.jpeg");
+}*/
