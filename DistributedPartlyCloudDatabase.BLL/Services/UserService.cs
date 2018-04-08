@@ -5,6 +5,7 @@ using DistributedPartlyCloudDatabase.DAL.Interface;
 using DistributedPartlyCloudDatabase.DAL.Interface.Repositories;
 using DistributedPartlyCloudDatabase.BLL.Mappers;
 using System.Linq;
+using System;
 
 namespace DistributedPartlyCloudDatabase.BLL.Services
 {
@@ -30,7 +31,12 @@ namespace DistributedPartlyCloudDatabase.BLL.Services
             return userRepository.GetAll().Select(user => user.ToBllUser());
         }
 
-        public UserEntity GetUserByNickName(string nickname)
+        public UserEntity GetUserByEmail(string email)
+        {
+            return userRepository.GetByEmail(email).ToBllUser();
+        }
+
+        public UserEntity GetUserByNickname(string nickname)
         {
             return userRepository.GetByNickname(nickname).ToBllUser();
         }

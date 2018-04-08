@@ -4,6 +4,7 @@ using System.Linq;
 using DistributedPartlyCloudDatabase.DAL.Interface.DTO;
 using System.Data.Entity;
 using DistributedPartlyCloudDatabase.ORM;
+using System;
 
 namespace DistributedPartlyCloudDatabase.DAL.Repositories
 {
@@ -45,6 +46,25 @@ namespace DistributedPartlyCloudDatabase.DAL.Repositories
                 Birthdate = user.Birthdate,
                 RoleId = user.RoleId
             });
+        }
+
+        public DalUser GetByEmail(string email)
+        {
+            User ormUser = context.Set<User>().FirstOrDefault(user => user.Email == email);
+
+            return ormUser != null
+                ? new DalUser()
+                {
+                    Id = ormUser.Id,
+                    Email = ormUser.Email,
+                    Password = ormUser.Password,
+                    Surname = ormUser.Surname,
+                    Name = ormUser.Name,
+                    Nickname = ormUser.Nickname,
+                    Birthdate = ormUser.Birthdate,
+                    RoleId = ormUser.RoleId
+                }
+                : null;
         }
 
         public DalUser GetById(int id)

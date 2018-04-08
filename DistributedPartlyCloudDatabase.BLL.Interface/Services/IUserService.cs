@@ -11,7 +11,10 @@ namespace DistributedPartlyCloudDatabase.BLL.Interface.Services
 
         void CreateUser(UserEntity user);
 
-        UserEntity GetUserByNickName(string nickname);
+        UserEntity GetUserByNickname(string nickname);
+
+        UserEntity GetUserByEmail(string email);
+
 
         //IEnumerable<UserEntity> GetUsersExceptCurrent(string currentUserEmail);
 

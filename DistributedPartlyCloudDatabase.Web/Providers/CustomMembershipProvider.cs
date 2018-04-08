@@ -1,8 +1,12 @@
-﻿using DistributedPartlyCloudDatabase.BLL.Services;
+﻿using DistributedPartlyCloudDatabase.BLL.Interface;
+using DistributedPartlyCloudDatabase.BLL.Interface.Entities;
+using DistributedPartlyCloudDatabase.BLL.Services;
+using DistributedPartlyCloudDatabase.Web.Infrastructure.Mappers;
+using DistributedPartlyCloudDatabase.Web.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text.RegularExpressions;
+using System.Web.Helpers;
 using System.Web.Security;
 
 namespace DistributedPartlyCloudDatabase.Web.Providers
@@ -17,7 +21,6 @@ namespace DistributedPartlyCloudDatabase.Web.Providers
             }
         }
 
-
         public RoleService RoleService
         {
             get
@@ -28,36 +31,78 @@ namespace DistributedPartlyCloudDatabase.Web.Providers
 
         public MembershipUser CreateUser(string email, string password, string nickname, string surname, string name, DateTime birthdate)
         {
-            var membershipUser = GetUser(email, false);
-            if (membershipUser != null)
-                return null;
+            //var membershipUser = GetUser(nickname, false);
+            //var ll = GetUserNameByEmail(email);
 
-            var user = new UserViewModel
+            if (GetUser(nickname, false) != null && GetUserNameByEmail(email) != null)
+            {
+                return null;
+            }
+
+            var userViewModel = new UserViewModel
             {
                 Email = email,
                 Password = Crypto.HashPassword(password),
+                Nickname = nickname,
                 Surname = surname,
                 Name = name,
-                DateOfBirth = dateOfBirth,
-                Banned = false
+                Birthdate = birthdate
             };
 
-            var role = RoleService.GetAllRoleEntities().FirstOrDefault(r => r.Description == "User");
-            if (role != null)
-                user.RoleId = role.Id;
+            RoleEntity userRoleEntity = RoleService.GetAllRoleEntities().FirstOrDefault(r => r.Name == "User");
+            if (userRoleEntity != null)
+            {
+                userViewModel.RoleId = userRoleEntity.Id;
+            }
 
-            UserService.CreateUser(user.ToBllUser());
-            membershipUser = GetUser(email, false);
+            UserService.CreateUser(userViewModel.ToBllUser());
+
+            MembershipUser membershipUser = GetUser(nickname, false);
+
             return membershipUser;
         }
 
+        public override bool ValidateUser(string username, string password)
+        {
+            Regex regex = new Regex(@"[A - Za - z0 - 9._ % +-] +@[A - Za - z0 - 9.-] +\.[A-Za-z]{2,4}");
+            var user = regex.IsMatch(username) 
+                ? UserService.GetUserByEmail(username) 
+                : UserService.GetUserByNickname(username);
 
+           
+            //var user = UserService.GetUserByEmail(username);
 
+            if (user != null && Crypto.VerifyHashedPassword(user.Password, password))
+                return true;
 
+            return false;
+        }
 
+        public override MembershipUser GetUser(string username, bool userIsOnline)
+        {
+            UserEntity userEntity = UserService.GetUserByNickname(username);
+            if (userEntity == null)
+            {
+                return null;
+            }
 
+            var membershipUser = new MembershipUser("CustomMembershipProvider", userEntity.Nickname,
+                null, null, null, null,
+                false, false, DateTime.Now,
+                DateTime.MinValue, DateTime.MinValue,
+                DateTime.MinValue, DateTime.MinValue);
 
+            return membershipUser;
+        }
 
+        public override string GetUserNameByEmail(string email)
+        {
+            UserEntity userEntity = UserService.GetUserByEmail(email);
+
+            return userEntity != null ? userEntity.Nickname : null;
+        }
+
+        #region Stabs
 
         public override bool EnablePasswordRetrieval
         {
@@ -182,10 +227,7 @@ namespace DistributedPartlyCloudDatabase.Web.Providers
             throw new NotImplementedException();
         }
 
-        public override bool ValidateUser(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public override bool UnlockUser(string userName)
         {
@@ -196,17 +238,7 @@ namespace DistributedPartlyCloudDatabase.Web.Providers
         {
             throw new NotImplementedException();
         }
-
-        public override MembershipUser GetUser(string username, bool userIsOnline)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string GetUserNameByEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
             throw new NotImplementedException();
@@ -231,5 +263,7 @@ namespace DistributedPartlyCloudDatabase.Web.Providers
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

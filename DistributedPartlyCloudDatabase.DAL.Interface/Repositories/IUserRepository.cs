@@ -10,5 +10,7 @@ namespace DistributedPartlyCloudDatabase.DAL.Interface.Repositories
         void Create(DalUser entity);
 
         DalUser GetByNickname(string nickname);
+
+        DalUser GetByEmail(string email);
     }
 }

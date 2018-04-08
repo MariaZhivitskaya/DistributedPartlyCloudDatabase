@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using DistributedPartlyCloudDatabase.DAL.Interface.DTO;
 using System.Data.Entity;
+using DistributedPartlyCloudDatabase.ORM;
+using System.Linq;
 
 namespace DistributedPartlyCloudDatabase.DAL.Repositories
 {
@@ -17,7 +19,11 @@ namespace DistributedPartlyCloudDatabase.DAL.Repositories
 
         public IEnumerable<DalRole> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Set<Role>().Select(dalRole => new DalRole()
+            {
+                Id = dalRole.Id,
+                Name = dalRole.Name
+            });
         }
     }
 }

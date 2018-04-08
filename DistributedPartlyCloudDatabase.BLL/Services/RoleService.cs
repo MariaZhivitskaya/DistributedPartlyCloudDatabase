@@ -1,5 +1,9 @@
-﻿using DistributedPartlyCloudDatabase.BLL.Interface.Services;
+﻿using DistributedPartlyCloudDatabase.BLL.Interface;
+using DistributedPartlyCloudDatabase.BLL.Interface.Services;
+using DistributedPartlyCloudDatabase.BLL.Mappers;
 using DistributedPartlyCloudDatabase.DAL.Interface.Repositories;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DistributedPartlyCloudDatabase.BLL.Services
 {
@@ -12,9 +16,9 @@ namespace DistributedPartlyCloudDatabase.BLL.Services
             this.roleRepository = roleRepository;
         }
 
-        //public IEnumerable<RoleEntity> GetAllRoleEntities()
-        //{
-        //    return roleRepository.GetAllRoles().Select(role => role.ToBllRole());
-        //}
+        public IEnumerable<RoleEntity> GetAllRoleEntities()
+        {
+            return roleRepository.GetAll().Select(role => role.ToBllRole());
+        }
     }
 }
