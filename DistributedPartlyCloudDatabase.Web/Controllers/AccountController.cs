@@ -1,8 +1,11 @@
 ﻿using DistributedPartlyCloudDatabase.BLL.Interface.Services;
 using DistributedPartlyCloudDatabase.Web.Infrastructure;
+using DistributedPartlyCloudDatabase.Web.Providers;
 using DistributedPartlyCloudDatabase.Web.ViewModels;
 using System;
+using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DistributedPartlyCloudDatabase.Web.Controllers
 {
@@ -27,22 +30,28 @@ namespace DistributedPartlyCloudDatabase.Web.Controllers
                 return View(registerViewModel);
             }
 
-            var anyUser = _service.GetAllUserEntities().Any(u => u.Email.Contains(registerViewModel.Email));
-
-            if (anyUser)
+            var existingUser = userService.GetAllUserEntities().Any(user => user.Email.Contains(registerViewModel.Email));
+            if (existingUser)
             {
                 ModelState.AddModelError("", "Such email already registered!");
                 return View(registerViewModel);
             }
 
+            existingUser = userService.GetAllUserEntities().Any(user => user.Nickname.Contains(registerViewModel.Nickname));
+            if (existingUser)
+            {
+                ModelState.AddModelError("", "Such nickname already registered!");
+                return View(registerViewModel);
+            }
+
             if (ModelState.IsValid)
             {
-                var subStrings = registerViewModel.DateOfBirth.Split('/');
+                var subStrings = registerViewModel.Birthdate.Split('/');
                 var date = new DateTime(int.Parse(subStrings[2]), int.Parse(subStrings[1]), int.Parse(subStrings[0]));
 
-                var membershipUser = ((CustomMembershipProvider)Membership.Provider)
-                    .CreateUser(registerViewModel.Email, registerViewModel.Password, registerViewModel.Surname,
-                    registerViewModel.Name, date);
+                var membershipUser = 
+                    ((CustomMembershipProvider)Membership.Provider).CreateUser
+                    (registerViewModel.Email, registerViewModel.Password,  registerViewModel.Nickname, registerViewModel.Surname, registerViewModel.Name, date);
 
                 if (membershipUser != null)
                 {
@@ -51,6 +60,7 @@ namespace DistributedPartlyCloudDatabase.Web.Controllers
                 }
                 ModelState.AddModelError("", "Sorry, an error occured while registration...");
             }
+
             return View(registerViewModel);
         }
 
