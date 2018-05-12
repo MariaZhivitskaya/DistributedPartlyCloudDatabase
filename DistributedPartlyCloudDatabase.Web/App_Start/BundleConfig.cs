@@ -21,11 +21,21 @@ namespace DistributedPartlyCloudDatabase.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/bootstrap-datepicker.js",
+                      "~/Scripts/respond.js",
+                      "~/Scripts/jquery.unobtrusive-ajax.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-datepicker.css",
+                      "~/Content/jquery-ui.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui")
+                .Include("~/Scripts/jquery-ui-{version}.js"));
+
+            bundles.Add(new StyleBundle("~/Content/jqueryui")
+               .Include("~/Content/themes/base/all.css"));
         }
     }
 }

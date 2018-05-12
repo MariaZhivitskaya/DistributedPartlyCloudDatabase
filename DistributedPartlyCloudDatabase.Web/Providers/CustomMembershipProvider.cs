@@ -4,6 +4,7 @@ using DistributedPartlyCloudDatabase.BLL.Services;
 using DistributedPartlyCloudDatabase.Web.Infrastructure.Mappers;
 using DistributedPartlyCloudDatabase.Web.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Helpers;
@@ -64,17 +65,18 @@ namespace DistributedPartlyCloudDatabase.Web.Providers
 
         public override bool ValidateUser(string username, string password)
         {
-            Regex regex = new Regex(@"[A - Za - z0 - 9._ % +-] +@[A - Za - z0 - 9.-] +\.[A-Za-z]{2,4}");
-            var user = regex.IsMatch(username) 
-                ? UserService.GetUserByEmail(username) 
-                : UserService.GetUserByNickname(username);
+            //Regex regex = new Regex(@"[A - Za - z0 - 9._ % +-] +@[A - Za - z0 - 9.-] +\.[A-Za-z]{2,4}");
+            //var user = regex.IsMatch(username) 
+            //    ? UserService.GetUserByEmail(username) 
+            //    : UserService.GetUserByNickname(username);
 
            
-            //var user = UserService.GetUserByEmail(username);
+            UserEntity userEntity = UserService.GetUserByEmail(username);
 
-            if (user != null && Crypto.VerifyHashedPassword(user.Password, password))
+            if (userEntity != null && Crypto.VerifyHashedPassword(userEntity.Password, password))
+            {
                 return true;
-
+            }
             return false;
         }
 

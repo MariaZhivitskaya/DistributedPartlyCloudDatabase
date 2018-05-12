@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Mappers\BllEntityMappers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ImageService.cs" />
     <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
@@ -53,6 +54,10 @@
     <ProjectReference Include="..\DistributedPartlyCloudDatabase.DAL.Interface\DistributedPartlyCloudDatabase.DAL.Interface.csproj">
       <Project>{D2B7B307-AD00-4775-BCA8-60F7FB37B59D}</Project>
       <Name>DistributedPartlyCloudDatabase.DAL.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DistributedPartlyCloudDatabase.ORM\DistributedPartlyCloudDatabase.ORM.csproj">
+      <Project>{BCCAE999-BC2C-4C49-9C65-5DA939AF5131}</Project>
+      <Name>DistributedPartlyCloudDatabase.ORM</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -23,20 +23,19 @@ namespace DistributedPartlyCloudDatabase.BLL.Mappers
 
         public static UserEntity ToBllUser(this DalUser dalUser)
         {
-            //if (dalUser == null)
-            //    return null;
-
-            return new UserEntity()
-            {
-                Id = dalUser.Id,
-                Email = dalUser.Email,
-                Password = dalUser.Password,
-                Nickname = dalUser.Nickname,
-                Surname = dalUser.Surname,
-                Name = dalUser.Name,
-                Birthdate = dalUser.Birthdate,
-                RoleId = dalUser.RoleId
-            };
+            return dalUser == null
+                ? null
+                : new UserEntity()
+                {
+                    Id = dalUser.Id,
+                    Email = dalUser.Email,
+                    Password = dalUser.Password,
+                    Nickname = dalUser.Nickname,
+                    Surname = dalUser.Surname,
+                    Name = dalUser.Name,
+                    Birthdate = dalUser.Birthdate,
+                    RoleId = dalUser.RoleId
+                };
         }
 
         public static RoleEntity ToBllRole(this DalRole dalRole)
@@ -45,6 +44,26 @@ namespace DistributedPartlyCloudDatabase.BLL.Mappers
             {
                 Id = dalRole.Id,
                 Name = dalRole.Name
+            };
+        }
+
+        public static DalImage ToDalImage(this ImageEntity imageEntity)
+        {
+            return new DalImage()
+            {
+                Id = imageEntity.Id,
+                BinaryImage = imageEntity.BinaryImage,
+                UserNickname = imageEntity.UserNickname
+            };
+        }
+
+        public static ImageEntity ToBllImage(this DalImage dalImage)
+        {
+            return new ImageEntity()
+            {
+                Id = dalImage.Id,
+                BinaryImage = dalImage.BinaryImage,
+                UserNickname = dalImage.UserNickname
             };
         }
     }

@@ -49,7 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureEntityModel.cs" />
     <Compile Include="EntityModel.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

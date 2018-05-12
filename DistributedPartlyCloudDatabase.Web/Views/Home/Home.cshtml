@@ -1,0 +1,32 @@
+﻿@model DistributedPartlyCloudDatabase.Web.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "My profile";
+}
+
+<h2>Home</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>Nickname:</dt>
+        <dd>@Model.Nickname</dd>
+        @if (!string.IsNullOrEmpty(Model.Name))
+        {
+            <dt>Name:</dt>
+            <dd>@Model.Name</dd>
+        }
+        @if (!string.IsNullOrEmpty(Model.Surname))
+        {
+            <dt>Surname:</dt>
+            <dd>@Model.Surname</dd>
+        }
+        <dt>Date of birth:</dt>
+        <dd>@Model.Birthdate.ToString("dd/MM/yyyy")</dd>
+        <dt>Email:</dt>
+        <dd>@Model.Email</dd>
+        @if (Model.RoleId.Equals(1))
+        {
+            @Html.Action("Users", "Home")
+        }
+    </dl>
+</div>

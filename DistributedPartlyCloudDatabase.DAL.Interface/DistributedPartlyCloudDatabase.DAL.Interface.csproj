@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DalImage.cs" />
     <Compile Include="DTO\DalRole.cs" />
     <Compile Include="DTO\DalUser.cs" />
     <Compile Include="DTO\IEntity.cs" />
+    <Compile Include="Repositories\IImageRepository.cs" />
     <Compile Include="Repositories\IRoleRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

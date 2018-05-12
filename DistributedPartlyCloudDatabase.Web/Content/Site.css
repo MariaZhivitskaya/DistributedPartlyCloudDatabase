@@ -27,3 +27,10 @@ textarea {
     border: 4px double black;
     background: url("Images/BgLogin.jpeg");
 }*/
+
+.required:after 
+{
+    content: "*";
+    font-weight: bold;
+    color: red; 
+}
