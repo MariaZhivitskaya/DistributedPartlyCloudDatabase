@@ -1,13 +1,13 @@
-﻿@model IEnumerable<WebApplication.ViewModels.ImageViewModel>
+﻿@model IEnumerable<DistributedPartlyCloudDatabase.Web.ViewModels.ImageViewModel>
 @{
-    ViewBag.Title = "Photos";
+    ViewBag.Title = "Images";
 }
 
 <h2>My images</h2>
 
 <div class="row text-center">
     <label class="btn btn-primary btn-file upload_btn">
-        Upload photo
+        Upload image
         <input type="file" name="upload" id="uploadFile" class="hidden">
     </label>
 </div>
@@ -15,12 +15,12 @@
     @foreach (var item in Model)
     {
         <div class="form-group" style="margin-top: 2%">
-            <img src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(@item.Image))" alt="image" style="margin-left: 30%; width: 40%" />
+            <img src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(@item.BinaryImage))" alt="image" style="margin-left: 30%; width: 40%" />
             @*<img src='<%= Url.Action( "RenderImage" , "Photos" , new { imageId = @item.Id} ) %>' alt="image" style="margin-left: 30%; width: 40%" />*@
             @*<img src='<%= Url.Action( "RenderImage", "Photos" , new { srcImg = @item.Image })%>' alt="image" style="margin-left: 30%; width: 40%"/>*@
             @*<img src="@Url.Action("RenderImage", "Photos", new { srcImg = @item.Image })" alt="image" style="margin-left: 30%; width: 40%" />*@
-            <span class="badge" style="margin-left: 2%;">@item.NumberOfLikes</span>
-            <span>like(s)</span>
+            @*<span class="badge" style="margin-left: 2%;">@item.NumberOfLikes</span>
+            <span>like(s)</span>*@
         </div>
     }
 </div>
@@ -54,7 +54,7 @@
                     }
 
                     $.ajax({
-                        url: '@Url.Action("UploadPhotos", "Photos")',
+                        url: '@Url.Action("UploadImages", "Images")',
                         type: "POST",
                         processData: false,
                         contentType: false,

@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,10 @@
     <ProjectReference Include="..\DistributedPartlyCloudDatabase.DAL.Interface\DistributedPartlyCloudDatabase.DAL.Interface.csproj">
       <Project>{D2B7B307-AD00-4775-BCA8-60F7FB37B59D}</Project>
       <Name>DistributedPartlyCloudDatabase.DAL.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DistributedPartlyCloudDatabase.DAL\DistributedPartlyCloudDatabase.DAL.csproj">
+      <Project>{71D72DC6-E426-4CA9-B024-525841315C3F}</Project>
+      <Name>DistributedPartlyCloudDatabase.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DistributedPartlyCloudDatabase.ORM\DistributedPartlyCloudDatabase.ORM.csproj">
       <Project>{BCCAE999-BC2C-4C49-9C65-5DA939AF5131}</Project>

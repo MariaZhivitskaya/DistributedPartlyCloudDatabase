@@ -6,44 +6,43 @@ using DistributedPartlyCloudDatabase.DAL.Interface.Repositories;
 using DistributedPartlyCloudDatabase.BLL.Mappers;
 using System.Linq;
 using System;
+using DistributedPartlyCloudDatabase.DAL.Repositories;
 
 namespace DistributedPartlyCloudDatabase.BLL.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IUserRepository userRepository;
-
-        public UserService(IUnitOfWork unitOfWork, IUserRepository userRepository)
+        private IDBOneRepositories DBOneRepositories;
+        
+        public UserService(IDBOneRepositories DBOneRepositories)
         {
-            this.unitOfWork = unitOfWork;
-            this.userRepository = userRepository;
+            this.DBOneRepositories = DBOneRepositories;
         }
 
         public void CreateUser(UserEntity user)
         {
-            userRepository.Create(user.ToDalUser());
-            unitOfWork.Commit();
+            DBOneRepositories.UserRepository.Create(user.ToDalUser());
+            DBOneRepositories.Commit();
         }
 
         public IEnumerable<UserEntity> GetAllUserEntities()
         {
-            return userRepository.GetAll().Select(user => user.ToBllUser());
+            return DBOneRepositories.UserRepository.GetAll().Select(user => user.ToBllUser());
         }
 
         public UserEntity GetUserByEmail(string email)
         {
-            return userRepository.GetByEmail(email).ToBllUser();
+            return DBOneRepositories.UserRepository.GetByEmail(email).ToBllUser();
         }
 
         public UserEntity GetUserByNickname(string nickname)
         {
-            return userRepository.GetByNickname(nickname).ToBllUser();
+            return DBOneRepositories.UserRepository.GetByNickname(nickname).ToBllUser();
         }
 
         public UserEntity GetUserEntityById(int id)
         {
-            return userRepository.GetById(id).ToBllUser();
+            return DBOneRepositories.UserRepository.GetById(id).ToBllUser();
         }
     }
 }

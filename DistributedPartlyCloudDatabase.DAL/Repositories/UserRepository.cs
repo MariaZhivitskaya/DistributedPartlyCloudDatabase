@@ -4,17 +4,17 @@ using System.Linq;
 using DistributedPartlyCloudDatabase.DAL.Interface.DTO;
 using System.Data.Entity;
 using DistributedPartlyCloudDatabase.ORM;
-using System;
 
 namespace DistributedPartlyCloudDatabase.DAL.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : RepositoryBase<DalUser>, IUserRepository
     {
-        private readonly DbContext context;
+        private EntityModel context;
 
-        public UserRepository(DbContext context)
+        public UserRepository(DbContext dbContext)
+            : base(dbContext)
         {
-            this.context = context;
+            context = (context ?? (EntityModel)dbContext);
         }
 
         public void Create(DalUser entity)
@@ -30,11 +30,13 @@ namespace DistributedPartlyCloudDatabase.DAL.Repositories
                 RoleId = entity.RoleId
             };
 
+           // uow.Commit();
             context.Set<User>().Add(user);
         }
 
-        public IEnumerable<DalUser> GetAll()
+        public new IEnumerable<DalUser> GetAll()
         {
+
             return context.Set<User>().Select(user => new DalUser()
             {
                 Id = user.Id,
@@ -51,6 +53,7 @@ namespace DistributedPartlyCloudDatabase.DAL.Repositories
         public DalUser GetByEmail(string email)
         {
             User ormUser = context.Set<User>().FirstOrDefault(user => user.Email == email);
+          
 
             return ormUser != null
                 ? new DalUser()
@@ -69,7 +72,7 @@ namespace DistributedPartlyCloudDatabase.DAL.Repositories
 
         public DalUser GetById(int id)
         {
-            User ormUser = context.Set<User>().FirstOrDefault(user => user.Id == id);
+            User ormUser = ormUser = context.Set<User>().FirstOrDefault(user => user.Id == id);
 
             return new DalUser()
             {

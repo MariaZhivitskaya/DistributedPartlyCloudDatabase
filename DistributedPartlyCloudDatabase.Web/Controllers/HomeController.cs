@@ -1,5 +1,6 @@
 ﻿using DistributedPartlyCloudDatabase.BLL.Interface.Entities;
 using DistributedPartlyCloudDatabase.BLL.Interface.Services;
+using DistributedPartlyCloudDatabase.DAL.Interface.Repositories;
 using DistributedPartlyCloudDatabase.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,9 @@ namespace DistributedPartlyCloudDatabase.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserService userService;
+          private readonly IUserService userService;
+        //private readonly IDBOneRepositories dBOneRepositories;
+
 
         public HomeController(IUserService uService)
         {

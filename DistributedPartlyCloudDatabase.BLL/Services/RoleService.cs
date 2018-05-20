@@ -9,16 +9,16 @@ namespace DistributedPartlyCloudDatabase.BLL.Services
 {
     public class RoleService : IRoleService
     {
-        private readonly IRoleRepository roleRepository;
+        private IDBOneRepositories DBOneRepositories;
 
-        public RoleService(IRoleRepository roleRepository)
+        public RoleService(IDBOneRepositories DBOneRepositories)
         {
-            this.roleRepository = roleRepository;
+            this.DBOneRepositories = DBOneRepositories;
         }
 
         public IEnumerable<RoleEntity> GetAllRoleEntities()
         {
-            return roleRepository.GetAll().Select(role => role.ToBllRole());
+            return DBOneRepositories.RoleRepository.GetAll().Select(role => role.ToBllRole());
         }
     }
 }

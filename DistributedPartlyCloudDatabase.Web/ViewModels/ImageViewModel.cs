@@ -1,18 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace DistributedPartlyCloudDatabase.ORM
+﻿namespace DistributedPartlyCloudDatabase.Web.ViewModels
 {
-    public class Image
+    public class ImageViewModel
     {
         public int Id { get; set; }
-
-        [Required]
         public byte[] BinaryImage { get; set; }
-
-        [Required]
         public string UserNickname { get; set; }
-
-        [Required]
         public string HashCode { get; set; }
     }
 }

@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <ApplicationInsightsResourceId>/subscriptions/1f1efb07-4216-4936-8307-c9db47eb334c/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/DistributedPartlyCloudDatabase.Web</ApplicationInsightsResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -167,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -175,6 +177,7 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomMembershipProvider.cs" />
+    <Compile Include="ViewModels\ImageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
@@ -270,9 +273,13 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\Images\_Image.cshtml" />
     <Content Include="Views\Images\Images.cshtml" />
+    <Content Include="Service References\Application Insights\ConnectedService.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -288,6 +295,10 @@
     <ProjectReference Include="..\DistributedPartlyCloudDatabase.BLL\DistributedPartlyCloudDatabase.BLL.csproj">
       <Project>{1f6c425d-c531-46cf-9da7-e2f855bee7d7}</Project>
       <Name>DistributedPartlyCloudDatabase.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DistributedPartlyCloudDatabase.DAL.Interface\DistributedPartlyCloudDatabase.DAL.Interface.csproj">
+      <Project>{D2B7B307-AD00-4775-BCA8-60F7FB37B59D}</Project>
+      <Name>DistributedPartlyCloudDatabase.DAL.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\DistributedPartlyCloudDatabase.DependencyResolver\DistributedPartlyCloudDatabase.DependencyResolver.csproj">
       <Project>{7e35a252-f24e-46fd-bb55-c7f421abfa4d}</Project>

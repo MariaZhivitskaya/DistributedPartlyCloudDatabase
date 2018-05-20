@@ -56,7 +56,10 @@ namespace DistributedPartlyCloudDatabase.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             System.Web.Mvc.DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            //kernel.Bind<EntityModel>().ToConstructor(_ => new EntityModel());
+            //kernel.Bind<AzureEntityModel>().ToConstructor(_ => new AzureEntityModel());
             kernel.Bind<EntityModel>().ToSelf().InRequestScope();
-        }        
+            kernel.Bind<AzureEntityModel>().ToSelf().InRequestScope();
+        }      
     }
 }

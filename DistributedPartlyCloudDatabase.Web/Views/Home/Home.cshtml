@@ -24,7 +24,7 @@
         <dd>@Model.Birthdate.ToString("dd/MM/yyyy")</dd>
         <dt>Email:</dt>
         <dd>@Model.Email</dd>
-        @if (Model.RoleId.Equals(1))
+        @if (Model.RoleId.Equals(2))
         {
             @Html.Action("Users", "Home")
         }

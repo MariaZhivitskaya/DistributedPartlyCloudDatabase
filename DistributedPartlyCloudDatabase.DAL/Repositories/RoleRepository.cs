@@ -5,16 +5,18 @@ using DistributedPartlyCloudDatabase.DAL.Interface.DTO;
 using System.Data.Entity;
 using DistributedPartlyCloudDatabase.ORM;
 using System.Linq;
+using Ninject;
 
 namespace DistributedPartlyCloudDatabase.DAL.Repositories
 {
-    public class RoleRepository : IRoleRepository
+    public class RoleRepository : RepositoryBase<DalRole>, IRoleRepository
     {
-        private readonly DbContext context;
+        private EntityModel context;
 
-        public RoleRepository(DbContext context)
+        public RoleRepository(DbContext dbContext)
+            : base(dbContext)
         {
-            this.context = context;
+            context = (context ?? (EntityModel)dbContext);
         }
 
         public IEnumerable<DalRole> GetAll()

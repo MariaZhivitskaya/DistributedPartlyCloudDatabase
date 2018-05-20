@@ -1,20 +1,21 @@
 ﻿using DistributedPartlyCloudDatabase.DAL.Interface.Repositories;
 using System.Data.Entity;
 using DistributedPartlyCloudDatabase.DAL.Interface.DTO;
-using System;
 using System.Collections.Generic;
 using DistributedPartlyCloudDatabase.ORM;
 using System.Linq;
+using Ninject;
 
 namespace DistributedPartlyCloudDatabase.DAL.Repositories
 {
-    public class ImageRepository : IImageRepository
+    public class ImageRepository : RepositoryBase<DalImage>, IImageRepository
     {
         private readonly DbContext context;
 
-        public ImageRepository(DbContext context)
+        public ImageRepository(DbContext dbContext)
+            : base(dbContext)
         {
-            this.context = context;
+            context = (context ?? (AzureEntityModel)dbContext);
         }
 
         public void Create(DalImage dalImage)
@@ -22,13 +23,14 @@ namespace DistributedPartlyCloudDatabase.DAL.Repositories
             var image = new Image()
             {
                 BinaryImage = dalImage.BinaryImage,
-                UserNickname = dalImage.UserNickname
+                UserNickname = dalImage.UserNickname,
+                HashCode = dalImage.HashCode
             };
 
             context.Set<Image>().Add(image);
         }
 
-        public IEnumerable<DalImage> GetAll()
+        public new IEnumerable<DalImage> GetAll()
         {
             return context.Set<Image>().Select(img => new DalImage()
             {

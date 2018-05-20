@@ -9,5 +9,6 @@ namespace DistributedPartlyCloudDatabase.BLL.Interface.Services
         IEnumerable<ImageEntity> GetAllImageEntities();
         IEnumerable<ImageEntity> GetByUserNickname(string userNickname);
         ImageEntity GetImageEntity(int id);
+        string ComputeHashCode(byte[] image);
     }
 }

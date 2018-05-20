@@ -53,7 +53,8 @@ namespace DistributedPartlyCloudDatabase.BLL.Mappers
             {
                 Id = imageEntity.Id,
                 BinaryImage = imageEntity.BinaryImage,
-                UserNickname = imageEntity.UserNickname
+                UserNickname = imageEntity.UserNickname,
+                HashCode = imageEntity.HashCode
             };
         }
 
@@ -63,7 +64,8 @@ namespace DistributedPartlyCloudDatabase.BLL.Mappers
             {
                 Id = dalImage.Id,
                 BinaryImage = dalImage.BinaryImage,
-                UserNickname = dalImage.UserNickname
+                UserNickname = dalImage.UserNickname,
+                HashCode = dalImage.HashCode
             };
         }
     }

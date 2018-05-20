@@ -5,8 +5,9 @@ namespace DistributedPartlyCloudDatabase.Web.Infrastructure.Mappers
 {
     public static class WebApplicationMappers
     {
-        public static UserEntity ToBllUser(this UserViewModel userViewModel) =>
-            new UserEntity()
+        public static UserEntity ToBllUser(this UserViewModel userViewModel)
+        {
+            return new UserEntity()
             {
                 Id = userViewModel.Id,
                 Email = userViewModel.Email,
@@ -17,5 +18,17 @@ namespace DistributedPartlyCloudDatabase.Web.Infrastructure.Mappers
                 Birthdate = userViewModel.Birthdate,
                 RoleId = userViewModel.RoleId
             };
+        }
+
+        public static ImageEntity ToBllImage(this ImageViewModel imageViewModel)
+        {
+            return new ImageEntity()
+            {
+                Id = imageViewModel.Id,
+                BinaryImage = imageViewModel.BinaryImage,
+                UserNickname = imageViewModel.UserNickname,
+                HashCode = imageViewModel.HashCode
+            };
+        }
     }
 }
