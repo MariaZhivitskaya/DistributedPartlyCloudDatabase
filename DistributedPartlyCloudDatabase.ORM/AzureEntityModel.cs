@@ -7,5 +7,7 @@ namespace DistributedPartlyCloudDatabase.ORM
         public AzureEntityModel() : base("name=AzureEntityModel") { }
 
         public virtual DbSet<Image> Images { get; set; }
+
+        public virtual DbSet<Like> Likes { get; set; }
     }
 }

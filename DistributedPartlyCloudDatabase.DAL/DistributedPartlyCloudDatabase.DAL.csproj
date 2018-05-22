@@ -57,6 +57,7 @@
     <Compile Include="Disposable.cs" />
     <Compile Include="Repositories\DBOneRepositories.cs" />
     <Compile Include="Repositories\DBTwoRepositories.cs" />
+    <Compile Include="Repositories\LikeRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ImageRepository.cs" />

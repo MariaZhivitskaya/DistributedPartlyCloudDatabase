@@ -19,8 +19,8 @@
             @*<img src='<%= Url.Action( "RenderImage" , "Photos" , new { imageId = @item.Id} ) %>' alt="image" style="margin-left: 30%; width: 40%" />*@
             @*<img src='<%= Url.Action( "RenderImage", "Photos" , new { srcImg = @item.Image })%>' alt="image" style="margin-left: 30%; width: 40%"/>*@
             @*<img src="@Url.Action("RenderImage", "Photos", new { srcImg = @item.Image })" alt="image" style="margin-left: 30%; width: 40%" />*@
-            @*<span class="badge" style="margin-left: 2%;">@item.NumberOfLikes</span>
-            <span>like(s)</span>*@
+            <span class="badge" style="margin-left: 2%;">@item.NumberOfLikes</span>
+            <span>like(s)</span>
         </div>
     }
 </div>

@@ -52,6 +52,7 @@
     <Compile Include="AzureEntityModel.cs" />
     <Compile Include="EntityModel.cs" />
     <Compile Include="Image.cs" />
+    <Compile Include="Like.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

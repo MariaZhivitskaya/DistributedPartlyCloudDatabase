@@ -54,6 +54,7 @@ namespace DistributedPartlyCloudDatabase.BLL.Mappers
                 Id = imageEntity.Id,
                 BinaryImage = imageEntity.BinaryImage,
                 UserNickname = imageEntity.UserNickname,
+                NumberOfLikes = imageEntity.NumberOfLikes,
                 HashCode = imageEntity.HashCode
             };
         }
@@ -65,7 +66,28 @@ namespace DistributedPartlyCloudDatabase.BLL.Mappers
                 Id = dalImage.Id,
                 BinaryImage = dalImage.BinaryImage,
                 UserNickname = dalImage.UserNickname,
+                NumberOfLikes = dalImage.NumberOfLikes,
                 HashCode = dalImage.HashCode
+            };
+        }
+
+        public static DalLike ToDalLike(this LikeEntity likeEntity)
+        {
+            return new DalLike()
+            {
+                Id = likeEntity.Id,
+                ImageId = likeEntity.ImageId,
+                UserId = likeEntity.UserId
+            };
+        }
+
+        public static LikeEntity ToBllLike(this DalLike dalLike)
+        {
+            return new LikeEntity()
+            {
+                Id = dalLike.Id,
+                ImageId = dalLike.ImageId,
+                UserId = dalLike.UserId
             };
         }
     }

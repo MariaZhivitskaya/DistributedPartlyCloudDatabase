@@ -31,12 +31,12 @@ namespace DistributedPartlyCloudDatabase.Web.Controllers
         public ActionResult Images()
         {
             string nickname = Membership.GetUser().UserName;
-           // var user = _userService.GetUserByEmail(email);
 
             var model = imageService.GetByUserNickname(nickname).Select(img => new ImageViewModel()
             {
                 BinaryImage = img.BinaryImage,
-                UserNickname = img.UserNickname
+                UserNickname = img.UserNickname,
+                NumberOfLikes = img.NumberOfLikes
             });
 
             return View(model);
@@ -59,12 +59,13 @@ namespace DistributedPartlyCloudDatabase.Web.Controllers
                     string hash = imageService.ComputeHashCode(fileData);
 
                     var nickname = Membership.GetUser().UserName;
-                  //  var user = userService.GetUserByNickname(email);
+                    //  var user = userService.GetUserByNickname(email);
 
                     var image = new ImageViewModel
                     {
                         BinaryImage = fileData,
                         UserNickname = nickname,
+                        NumberOfLikes = 0,
                         HashCode = hash
                     };
 
@@ -80,7 +81,7 @@ namespace DistributedPartlyCloudDatabase.Web.Controllers
 
         public ActionResult RenderImage(byte[] srcImg)
         {
-            System.IO.MemoryStream ms = new System.IO.MemoryStream(srcImg);
+            MemoryStream ms = new MemoryStream(srcImg);
             ms.Position = 0;
             return new FileStreamResult(ms, "image/jpeg");
         }

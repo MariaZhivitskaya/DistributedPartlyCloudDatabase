@@ -24,6 +24,7 @@ namespace DistributedPartlyCloudDatabase.DAL.Repositories
             {
                 BinaryImage = dalImage.BinaryImage,
                 UserNickname = dalImage.UserNickname,
+                NumberOfLikes = dalImage.NumberOfLikes,
                 HashCode = dalImage.HashCode
             };
 
@@ -36,7 +37,9 @@ namespace DistributedPartlyCloudDatabase.DAL.Repositories
             {
                 Id = img.Id,
                 BinaryImage = img.BinaryImage,
-                UserNickname = img.UserNickname
+                UserNickname = img.UserNickname,
+                NumberOfLikes = img.NumberOfLikes,
+                HashCode = img.HashCode
             });
         }
 
@@ -48,7 +51,9 @@ namespace DistributedPartlyCloudDatabase.DAL.Repositories
             {
                 Id = ormImg.Id,
                 BinaryImage = ormImg.BinaryImage,
-                UserNickname = ormImg.UserNickname
+                UserNickname = ormImg.UserNickname,
+                NumberOfLikes = ormImg.NumberOfLikes,
+                HashCode = ormImg.HashCode
             };
         }
     }

@@ -13,6 +13,9 @@ namespace DistributedPartlyCloudDatabase.ORM
         public string UserNickname { get; set; }
 
         [Required]
+        public int NumberOfLikes { get; set; }
+
+        [Required]
         public string HashCode { get; set; }
     }
 }
